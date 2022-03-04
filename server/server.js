@@ -9,12 +9,13 @@ import {
   updateScoreInCookie,
   scoreCookieMaker,
 } from "./scoreCookie.js";
+import * as Process from "process";
 
 dotenv.config();
 
 const app = express();
 app.use(bodyParser.json());
-app.use(cookieParser("MySecretCookieSecretIsSecret"));
+app.use(cookieParser(Process.env.COOKIE_SECRET));
 app.use(scoreCookieMaker());
 
 app.get("/api/score", (req, res) => {
