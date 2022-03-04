@@ -4,7 +4,6 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import { checkAnswer, questions, retrieveRandomQuestion } from "./questions.js";
-import * as Process from "process";
 import {
   retrieveScoreFromCookie,
   updateScoreInCookie,
@@ -15,7 +14,7 @@ dotenv.config();
 
 const app = express();
 app.use(bodyParser.json());
-app.use(cookieParser(Process.env.COOKIE_SECRET));
+app.use(cookieParser("MySecretCookieSecretIsSecret"));
 app.use(scoreCookieMaker());
 
 app.get("/api/score", (req, res) => {
